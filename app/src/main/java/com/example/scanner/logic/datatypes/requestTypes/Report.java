@@ -4,21 +4,26 @@ import java.util.List;
 
 public class Report {
     private String id;
-    private ProductLine productLine;
+    private List<ScannedProduct> productLine;
 
-    public ProductLine getProductLine() {
+    public Report(String id, List<ScannedProduct> line) {
+        this.id = id;
+        productLine = line;
+    }
+
+    public List<ScannedProduct> getProductLine() {
         return productLine;
     }
 
-    public void setProductLine(ProductLine productLine) {
+    public void setProductLine(List<ScannedProduct> productLine) {
         this.productLine = productLine;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

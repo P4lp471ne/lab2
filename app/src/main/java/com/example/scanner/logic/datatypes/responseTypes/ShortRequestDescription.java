@@ -1,11 +1,25 @@
 package com.example.scanner.logic.datatypes.responseTypes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(value = { "self_life_preference" })
 public class ShortRequestDescription {
     private int id;
     private String extId;
     private String nameView;
-    private String collection_date;
+    private String collectionDate;
     private int status;
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    private String comment;
 
     public int getId() {
         return id;
@@ -15,6 +29,7 @@ public class ShortRequestDescription {
         this.id = id;
     }
 
+    @JsonProperty("ext_id")
     public String getExtId() {
         return extId;
     }
@@ -23,6 +38,7 @@ public class ShortRequestDescription {
         this.extId = extId;
     }
 
+    @JsonProperty("name_view")
     public String getNameView() {
         return nameView;
     }
@@ -31,12 +47,13 @@ public class ShortRequestDescription {
         this.nameView = nameView;
     }
 
-    public String getCollection_date() {
-        return collection_date;
+    @JsonProperty("collection_date")
+    public String getCollectionDate() {
+        return collectionDate;
     }
 
-    public void setCollection_date(String collection_date) {
-        this.collection_date = collection_date;
+    public void setCollectionDate(String collectionDate) {
+        this.collectionDate = collectionDate;
     }
 
     public int getStatus() {

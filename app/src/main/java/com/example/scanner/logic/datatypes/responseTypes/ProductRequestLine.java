@@ -4,6 +4,11 @@ public class ProductRequestLine {
     private Product product;
     private int quantity;
 
+    public ProductRequestLine(Product product, Integer integer) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     public int getQuantity() {
         return quantity;
     }

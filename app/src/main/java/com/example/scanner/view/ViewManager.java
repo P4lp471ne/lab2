@@ -1,59 +1,64 @@
 package com.example.scanner.view;
 
 import android.content.Context;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.scanner.R;
+import com.example.scanner.App;
 import com.example.scanner.logic.Logic;
 import com.example.scanner.utils.CallbackProvider;
+import com.example.scanner.view.activities.AbstractViewHolder;
 import com.example.scanner.view.activities.ProductsView;
 import com.example.scanner.view.activities.RequestsView;
 
 public class ViewManager {
     private Logic logic;
     private Context context;
-    private AppCompatActivity app;
+    private App app;
+    private AbstractViewHolder gui;
 
-    ViewManager(Context context){
+    public ViewManager(Context context) {
         this.context = context;
     }
 
-    protected void setLogic(Logic logic) {
+    public void setLogic(Logic logic) {
         this.logic = logic;
     }
 
-    protected void setApp(AppCompatActivity app){
-        this.app = app;
-    }
-
-    void startScreen() {
+    public void startScreen() {
         requestsView();
     }
 
-    void productsView(){
-        ProductsView view = new ProductsView(this);
-        app.setContentView(view.getView());
+    public void productsView(String requestId) {
+        gui = new ProductsView(this);
+        update();
     }
 
-    void requestsView(){
-        LinearLayout linearLayout = app.findViewById(R.id.start_view);
-        ListView lst = app.findViewById(R.id.listview);
-        RequestsView view = new RequestsView(this);
-        app.setContentView(view.getView());
+    void requestsView() {
+        gui = new RequestsView(this);
+        update();
     }
 
-    public void requestProducts(String id, ProductsListCallback setItems){
-        CallbackProvider.createProductsListCallback(setItems, null);
+    private void update() {
+        gui.setApp(app);
+        app.get().setContentView(gui.getView());
     }
 
-    private AppCompatActivity getApp(){
+    public void requestProducts(String id, ProductsListCallback setItems) {
+        logic.requestProductRequestData(id, setItems);
+    }
+
+    private App getApp() {
         return app;
     }
 
+    public void setApp(App app) {
+        this.app = app;
+    }
+
     public void requestProductRequests(ReqListCallback setItems) {
-        CallbackProvider.createReqListCallback(setItems, null);
+        logic.requestRequestsList(setItems);
+    }
+
+    public void cancel(String id) {
+        logic.requestCancel(id, null);
     }
 }

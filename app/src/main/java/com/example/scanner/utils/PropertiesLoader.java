@@ -8,10 +8,24 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesLoader {
-    private Context context;
     private static PropertiesLoader instance;
+    private Context context;
 
-    private PropertiesLoader(){}
+    private PropertiesLoader() {
+    }
+
+    public static PropertiesLoader getInstance() {
+        PropertiesLoader result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized (PropertiesLoader.class) {
+            if (instance == null) {
+                instance = new PropertiesLoader();
+            }
+            return instance;
+        }
+    }
 
     public String getProperty(String key) throws IOException {
         Properties properties = new Properties();
@@ -21,20 +35,7 @@ public class PropertiesLoader {
         return properties.getProperty(key);
     }
 
-    public void setContext(Context context){
+    public void setContext(Context context) {
         this.context = context;
-    }
-
-    public static PropertiesLoader getInstance(){
-        PropertiesLoader result = instance;
-        if (result != null) {
-            return result;
-        }
-        synchronized(PropertiesLoader.class) {
-            if (instance == null) {
-                instance = new PropertiesLoader();
-            }
-            return instance;
-        }
     }
 }

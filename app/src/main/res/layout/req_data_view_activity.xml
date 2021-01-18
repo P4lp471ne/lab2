@@ -34,6 +34,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+        <Switch
+            android:id="@+id/doubleScanSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Switch" />
+
         <Button
             android:id="@+id/action2"
             android:layout_width="wrap_content"
@@ -41,7 +48,7 @@
             android:text="Refresh" />
 
         <Button
-            android:id="@+id/action1"
+            android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="cancel" />

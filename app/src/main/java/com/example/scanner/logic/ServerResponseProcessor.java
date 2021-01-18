@@ -15,7 +15,7 @@ import okhttp3.Response;
 public class ServerResponseProcessor {
     static ObjectMapper mapper = new ObjectMapper();
 
-    static List<ShortRequestDescription> parseReqListResponse(Response response){
+    static List<ShortRequestDescription> parseReqListResponse(Response response) {
         try {
             return mapper.readValue(response.body().string(),
                     mapper.getTypeFactory().constructCollectionType(List.class,
@@ -31,7 +31,7 @@ public class ServerResponseProcessor {
     }
     //List<MstCode> mstCodes = mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, MstCode.class));
 
-    static RequestData parseReqDataResponse(Response response){
+    static RequestData parseReqDataResponse(Response response) {
         try {
             RequestData data = mapper.readValue(response.body().string(), RequestData.class);
             return data;
@@ -45,8 +45,8 @@ public class ServerResponseProcessor {
         return null;
     }
 
-    static Product parseScanResult(Response response){
-        try{
+    static Product parseScanResult(Response response) {
+        try {
             Product prod = mapper.readValue(response.body().string(), Product.class);
             return prod;
         } catch (JsonMappingException e) {
@@ -59,8 +59,8 @@ public class ServerResponseProcessor {
         return null;
     }
 
-    static boolean parseStartResponse(Response response){
-        try{
+    static boolean parseStartResponse(Response response) {
+        try {
             Boolean res = mapper.readValue(response.body().string(), Boolean.class);
             return res.booleanValue();
         } catch (JsonMappingException e) {
@@ -73,11 +73,11 @@ public class ServerResponseProcessor {
         return false;
     }
 
-    static boolean parseCancelResponse(Response response){
+    static boolean parseCancelResponse(Response response) {
         return parseStartResponse(response);
     }
 
-    static boolean parseFinishResponse(Response response){
+    static boolean parseFinishResponse(Response response) {
         return parseStartResponse(response);
     }
 }

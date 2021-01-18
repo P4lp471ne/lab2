@@ -18,7 +18,7 @@ public class ReqListAdapter extends ArrayAdapter<ShortRequestDescription> {
     }
 
     @Override
-    public View getView(int position, View reqView, ViewGroup parent){
+    public View getView(int position, View reqView, ViewGroup parent) {
         ShortRequestDescription req = getItem(position);
 
         if (reqView == null) {
@@ -33,7 +33,7 @@ public class ReqListAdapter extends ArrayAdapter<ShortRequestDescription> {
         ((TextView) reqView.findViewById(R.id.Status))
                 .setText(req.getStatus());
         ((TextView) reqView.findViewById(R.id.Date))
-                .setText(req.getCollection_date());
+                .setText(req.getCollectionDate());
 
         return reqView;
     }

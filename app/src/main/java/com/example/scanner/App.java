@@ -1,4 +1,4 @@
-package com.example.scanner.view;
+package com.example.scanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 

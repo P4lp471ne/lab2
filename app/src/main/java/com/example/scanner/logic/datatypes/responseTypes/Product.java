@@ -1,6 +1,7 @@
 package com.example.scanner.logic.datatypes.responseTypes;
 
 public class Product {
+    boolean isDelete;
     private int id;
     private CorportationId corportationId;
     private String nameView;
@@ -45,6 +46,4 @@ public class Product {
     public void setDelete(boolean delete) {
         isDelete = delete;
     }
-
-    boolean isDelete;
 }

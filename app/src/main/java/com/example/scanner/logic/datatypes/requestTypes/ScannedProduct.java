@@ -1,6 +1,6 @@
 package com.example.scanner.logic.datatypes.requestTypes;
 
-public class Product {
+public class ScannedProduct {
     private String serialNumber;
     private int quantity;
 
