@@ -13,9 +13,11 @@ import androidx.annotation.NonNull;
 import com.example.scanner.R;
 import com.example.scanner.logic.datatypes.responseTypes.ProductRequestLine;
 
+import java.util.List;
+
 public class ProductsListAdapter extends ArrayAdapter<ProductRequestLine> {
     public ProductsListAdapter(@NonNull Context context, int resource,
-                               @NonNull ProductRequestLine[] objects) {
+                               @NonNull List<ProductRequestLine> objects) {
         super(context, resource, objects);
 
     }
@@ -26,7 +28,7 @@ public class ProductsListAdapter extends ArrayAdapter<ProductRequestLine> {
 
         if (prodView == null) {
             prodView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.req_item, parent);
+                    .inflate(R.layout.prod_item, null);
         }
 
         ((TextView) prodView.findViewById(R.id.prod_name_view))
@@ -34,7 +36,7 @@ public class ProductsListAdapter extends ArrayAdapter<ProductRequestLine> {
         ((TextView) prodView.findViewById(R.id.product_code))
                 .setText(req.getProduct().getProductCode());
         ((TextView) prodView.findViewById(R.id.quantity))
-                .setText(req.getQuantity());
+                .setText(String.valueOf(req.getQuantity()));
 
         if (req.getQuantity() == 0){
             prodView.setBackgroundColor(Color.red(0));

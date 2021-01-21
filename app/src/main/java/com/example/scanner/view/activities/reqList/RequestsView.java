@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
 
 import com.example.scanner.R;
 import com.example.scanner.logic.datatypes.responseTypes.ShortRequestDescription;
 import com.example.scanner.view.ViewManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RequestsView extends AbstractViewHolder {
@@ -26,31 +29,23 @@ public class RequestsView extends AbstractViewHolder {
     protected void makeView() {
 
         view = LayoutInflater.from(getApp().getApplicationContext())
-                .inflate(R.layout.req_list_view_activity, null).findViewById(R.id.start_view);
-        listView = LayoutInflater.from(getApp().getApplicationContext())
-                .inflate(R.layout.list_view, null).findViewById(R.id.listview);
-        view.addView(listView);
+                .inflate(R.layout.req_list_view_activity, null);
+//        listView = view.findViewById(R.id.req_list);
 
-        Button exit = LayoutInflater.from(getApp().getApplicationContext())
-                .inflate(R.layout.req_list_view_activity, null).findViewById(R.id.exitButton);
+        Button exit = view.findViewById(R.id.exitButton);
         exit.setOnClickListener((e) -> {
             System.exit(0);
         });
 
-        Button refresh = LayoutInflater.from(getApp().getApplicationContext())
-                .inflate(R.layout.req_list_view_activity, null).findViewById(R.id.update);
+        Button refresh = view.findViewById(R.id.update);
+//        refresh
         refresh.setOnClickListener(this::refresh);
 
-        adapter = new ReqListAdapter(getApp().getApplicationContext(),
-                R.layout.req_item, new ShortRequestDescription[]{});
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener((new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                manager.productsView(String.valueOf(data.get(position).getId()));
-            }
-        }
-        ));
+//        adapter = new ReqListAdapter(getApp().getApplicationContext(),
+//                R.layout.req_item, data);
+//        listView.setAdapter(adapter);
+
+        setListView();
 
         refresh(view);
     }
@@ -59,6 +54,20 @@ public class RequestsView extends AbstractViewHolder {
         manager.requestProductRequests(this::setItems);
     }
 
+    private void setListView() {
+        listView = inflater.inflate(R.layout.list_view, null).findViewById(R.id.listview);
+        ((LinearLayout)view.findViewById(R.id.start_view)).addView(listView);
+        adapter = new ReqListAdapter(getApp().getApplicationContext(),
+                R.layout.req_item, data);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener((new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                manager.productsView(String.valueOf(data.get(position).getId()));
+            }
+        }
+        ));
+    }
 
     private void setItems(List<ShortRequestDescription> requestsList) {
         if (adapter == null) return;
